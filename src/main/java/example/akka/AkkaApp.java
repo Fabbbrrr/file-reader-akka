@@ -6,6 +6,7 @@ import akka.actor.Props;
 import akka.dispatch.OnSuccess;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
+import example.akka.actors.FileAnalysisActor;
 import example.akka.messages.FileAnalysisMessage;
 import example.akka.messages.FileProcessedMessage;
 import example.akka.utils.MapUtil;

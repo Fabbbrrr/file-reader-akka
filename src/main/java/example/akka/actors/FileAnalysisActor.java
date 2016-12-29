@@ -1,4 +1,4 @@
-package example.akka;
+package example.akka.actors;
 
 import java.io.File;
 import java.util.HashMap;

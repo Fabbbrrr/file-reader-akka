@@ -1,4 +1,4 @@
-package example.akka;
+package example.akka.actors;
 
 import akka.actor.UntypedActor;
 import example.akka.messages.LineProcessingResult;
