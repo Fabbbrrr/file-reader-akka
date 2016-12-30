@@ -40,6 +40,8 @@ public class AkkaApp {
             public void onSuccess(Object message) throws Throwable {
                 if (message instanceof FileProcessedMessage) {
                     printResults((FileProcessedMessage) message);
+
+                    // Stop the actor system
                     akkaSystem.shutdown();
                 }
             }
