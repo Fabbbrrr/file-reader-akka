@@ -1,4 +1,4 @@
-package example.akka.messages;
+package demo.messages;
 
 import java.util.Map;
 

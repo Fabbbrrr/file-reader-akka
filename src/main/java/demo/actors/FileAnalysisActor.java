@@ -1,13 +1,14 @@
-package example.akka.actors;
+package demo.actors;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import example.akka.messages.FileAnalysisMessage;
-import example.akka.messages.FileProcessedMessage;
-import example.akka.messages.LineProcessingResult;
-import example.akka.messages.LogLineMessage;
+import demo.messages.FileAnalysisMessage;
+import demo.messages.FileProcessedMessage;
+import demo.messages.LineProcessingResult;
+import demo.messages.LogLineMessage;
 import org.apache.commons.io.FileUtils;
 
 import akka.actor.ActorRef;
@@ -23,7 +24,7 @@ import akka.actor.UntypedActor;
  */
 public class FileAnalysisActor extends UntypedActor {
 
-    private HashMap<String, Long> ipMap = new HashMap();
+    private Map<String, Long> ipMap = new HashMap<>();
     private long fileLineCount;
     private long processedCount;
     private ActorRef analyticsSender = null;

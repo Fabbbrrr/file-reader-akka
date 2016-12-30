@@ -1,8 +1,8 @@
-package example.akka.actors;
+package demo.actors;
 
 import akka.actor.UntypedActor;
-import example.akka.messages.LineProcessingResult;
-import example.akka.messages.LogLineMessage;
+import demo.messages.LineProcessingResult;
+import demo.messages.LogLineMessage;
 
 public class LogLineProcessor extends UntypedActor {
 

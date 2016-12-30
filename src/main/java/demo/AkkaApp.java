@@ -1,4 +1,4 @@
-package example.akka;
+package demo;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -6,13 +6,13 @@ import akka.actor.Props;
 import akka.dispatch.OnSuccess;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
-import example.akka.actors.FileAnalysisActor;
-import example.akka.messages.FileAnalysisMessage;
-import example.akka.messages.FileProcessedMessage;
-import example.akka.utils.MapUtil;
+import demo.actors.FileAnalysisActor;
+import demo.messages.FileAnalysisMessage;
+import demo.messages.FileProcessedMessage;
 import scala.concurrent.ExecutionContext;
 import scala.concurrent.Future;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -40,20 +40,27 @@ public class AkkaApp {
             public void onSuccess(Object message) throws Throwable {
                 if (message instanceof FileProcessedMessage) {
                     printResults((FileProcessedMessage) message);
+                    akkaSystem.shutdown();
                 }
             }
 
             private void printResults(FileProcessedMessage message) {
-                Map<String, Long> sortedMap = MapUtil.sortByValue(message.getData());
                 System.out.println("================================");
                 System.out.println("||\tCount\t||\t\tIP");
                 System.out.println("================================");
-                for (Map.Entry<String, Long> entry : sortedMap.entrySet()) {
-                    System.out.println("||\t" + entry.getValue() + "   \t||\t" + entry.getKey());
-                }
+
+                Map<String, Long> result = new LinkedHashMap<>();
+
+                // Sort by value and put it into the "result" map
+                message.getData().entrySet().stream()
+                        .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                        .forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
+
+                // Print only if count > 50
+                result.entrySet().stream().filter(entry -> entry.getValue() > 50).forEach(entry ->
+                    System.out.println("||\t" + entry.getValue() + "   \t||\t" + entry.getKey())
+                );
             }
         }, ec);
-
     }
-
 }

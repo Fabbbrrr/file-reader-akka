@@ -1,4 +1,4 @@
-package example.akka.messages;
+package demo.messages;
 
 public class LogLineMessage {
 
